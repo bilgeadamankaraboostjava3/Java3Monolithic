@@ -1,6 +1,7 @@
 package com.muhammet.Java3Monolithic.repository;
 
 import com.muhammet.Java3Monolithic.repository.entity.Musteri;
+import com.muhammet.Java3Monolithic.repository.entity.view.VwMusteri;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -73,9 +74,9 @@ public interface IMusteriRepository extends JpaRepository<Musteri,Long> {
      * DESC -> Z..A
      * @return
      */
-    Musteri findByDogumtarihiOrderBy();
-    Musteri findByDogumtarihiOrderByDesc();
-    Musteri findTopByDogumtarihiOrderByDesc(); // sadece 1 kayıt getirir.
+    List<Musteri> findByOrderByDogumtarihi();
+    List<Musteri> findByOrderByDogumtarihiDesc();
+    Musteri findTopByOrderByDogumtarihiDesc(); // sadece 1 kayıt getirir.
 
     /**
      * ÖNEMLİ !!!!!
@@ -84,8 +85,8 @@ public interface IMusteriRepository extends JpaRepository<Musteri,Long> {
      *
      * @return
      */
-    List<Musteri> findTop3ByDogumtarihiOrderByDesc(); // ilk 3 ü getirir.
-    Optional<List<Musteri>> findTop3OptionalByDorumtarihiOrderByDesc(); // ilk 3 ü getirir. Optional olarak döner.
+    List<Musteri> findTop3ByOrderByDogumtarihiDesc(); // ilk 3 ü getirir.
+    Optional<List<Musteri>> findTop3OptionalByOrderByDogumtarihiDesc(); // ilk 3 ü getirir. Optional olarak döner.
 
     /**
      * select * from tblmusteri where dogumtarihi > ? and dogumtarihi < ?
@@ -96,9 +97,9 @@ public interface IMusteriRepository extends JpaRepository<Musteri,Long> {
     /**
      * 1- aktif olan müşterileri getir.
      */
-    List<Musteri> findAllByIsactive(boolean isactive);// true, false
-    List<Musteri> findAllByIsactiveTrue();// aktif kayıtlar
-    List<Musteri> findAllByIsactiveFalse();// pasif kayıtlar
+  //  List<Musteri> findAllByIsactive(boolean isactive);// true, false
+  //  List<Musteri> findAllByIsactiveTrue();// aktif kayıtlar
+ //   List<Musteri> findAllByIsactiveFalse();// pasif kayıtlar
     /**
      * 2- id sini verdiğim müşteriyi bul
      */
@@ -140,6 +141,7 @@ public interface IMusteriRepository extends JpaRepository<Musteri,Long> {
     Musteri bulAdSoyad(String ad,String soyad);
     /**
      * Native SQL kullanımı
+     * NOT: Table adı içni kontrol sağlayalım.
      */
     @Query(value = "select * from Musteri where email= ?1",nativeQuery = true)
     List<Musteri> getirEmailAdresineGore(String email);
@@ -153,6 +155,11 @@ public interface IMusteriRepository extends JpaRepository<Musteri,Long> {
             @Param("paramad") String musteriAdi,
             @Param("paramemail") String musteriEmaili
     );
+
+    @Query("select " +
+            "new com.muhammet.Java3Monolithic.repository.entity.view.VwMusteri(m.id, m.ad, m.soyad) " +
+            "from Musteri m")
+    List<VwMusteri> findAllView();
 
 
 }

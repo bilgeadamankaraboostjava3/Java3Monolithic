@@ -2,6 +2,7 @@ package com.muhammet.Java3Monolithic.service;
 
 import com.muhammet.Java3Monolithic.repository.IMusteriRepository;
 import com.muhammet.Java3Monolithic.repository.entity.Musteri;
+import com.muhammet.Java3Monolithic.repository.entity.view.VwMusteri;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,5 +56,16 @@ public class MusteriService {
 
     public List<Musteri> findByAdres(String adres){
        return musteriRepository.findByAdres(adres);
+    }
+
+    public Iterable<Musteri> saveAll(List<Musteri> musteriler){
+        musteriler.forEach(musteri -> {
+            musteri.setCreatedate(System.currentTimeMillis());
+        });
+        return musteriRepository.saveAll(musteriler);
+    }
+
+    public List<VwMusteri> getMusteriView(){
+        return musteriRepository.findAllView();
     }
 }

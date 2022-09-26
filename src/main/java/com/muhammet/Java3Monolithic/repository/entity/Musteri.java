@@ -1,6 +1,7 @@
 package com.muhammet.Java3Monolithic.repository.entity;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 
@@ -9,8 +10,8 @@ import javax.persistence.*;
 @AllArgsConstructor // parametreli constructor
 @NoArgsConstructor // default constructor
 @Data // getter setter
-@Builder // builder pattern
-public class Musteri {
+@SuperBuilder // builder pattern
+public class Musteri extends Default {
     /**
      * Tüm property lerin getter ve setter ları eklenmeli.
      * Parametreli ve Parametresiz constructor.
@@ -25,5 +26,4 @@ public class Musteri {
     int dogumtarihi;
     String email;
     String username;
-    boolean isactive;
 }

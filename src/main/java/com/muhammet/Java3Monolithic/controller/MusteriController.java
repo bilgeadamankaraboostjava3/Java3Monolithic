@@ -1,6 +1,7 @@
 package com.muhammet.Java3Monolithic.controller;
 
 import com.muhammet.Java3Monolithic.repository.entity.Musteri;
+import com.muhammet.Java3Monolithic.repository.entity.view.VwMusteri;
 import com.muhammet.Java3Monolithic.service.MusteriService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -35,6 +36,12 @@ public class MusteriController {
         return ResponseEntity.ok(musteriService.findAll());
     }
 
+    @GetMapping("/findallview")
+    public ResponseEntity<List<VwMusteri>> findAllView(){
+        return ResponseEntity.ok(musteriService.getMusteriView());
+    }
+
+
     /**
      * localhost:9090/musteri/findbyadres?adres=İstanbul
      * @param adres
@@ -44,4 +51,5 @@ public class MusteriController {
     public ResponseEntity<List<Musteri>> findByAdres(String adres){
         return ResponseEntity.ok(musteriService.findByAdres(adres));
     }
+
 }
