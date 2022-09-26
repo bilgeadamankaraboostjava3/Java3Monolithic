@@ -1,5 +1,7 @@
 package com.muhammet.Java3Monolithic.service;
 
+import com.muhammet.Java3Monolithic.dto.response.MusteriFindByIdResponseDto;
+import com.muhammet.Java3Monolithic.mapper.MusteriMapper;
 import com.muhammet.Java3Monolithic.repository.IMusteriRepository;
 import com.muhammet.Java3Monolithic.repository.entity.Musteri;
 import com.muhammet.Java3Monolithic.repository.entity.view.VwMusteri;
@@ -68,4 +70,28 @@ public class MusteriService {
     public List<VwMusteri> getMusteriView(){
         return musteriRepository.findAllView();
     }
+
+    public MusteriFindByIdResponseDto findByIdDto(Long id){
+        Musteri musteri = musteriRepository.getReferenceById(id);
+        return  MusteriMapper.INSTANCE.toMusteriFindByIdResponseDto(musteri);
+        /*
+        return MusteriFindByIdResponseDto.builder()
+                .ad(musteri.getAd())
+                .il(musteri.getIl())
+                .dogumtarihi(musteri.getDogumtarihi())
+                .aramalardagorunmesin(musteri.isAramalardagorunmesin())
+                .email(musteri.getEposta())
+                .bildirimlerikapat(musteri.isBildirimlerikapat())
+                .ilce(musteri.getIlce())
+                .mahalle(musteri.getMahalle())
+                .sokak(musteri.getSokak())
+                .soyad(musteri.getSoyad())
+                .telefon(musteri.getTelefon())
+                .medenihali(musteri.getMedenihali())
+                .meslek(musteri.getMeslek())
+                .build();
+                */
+
+    }
+
 }

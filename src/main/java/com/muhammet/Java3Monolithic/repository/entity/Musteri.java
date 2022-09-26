@@ -26,4 +26,25 @@ public class Musteri extends Default {
     int dogumtarihi;
     String email;
     String username;
+    String psw;
+    String il;
+    String ilce;
+    String mahalle;
+    String sokak;
+    String postakodu;
+    String cinsiyet;
+    String tcno;
+    String dogumyeri;
+    String medenihali;
+    String meslek;
+    String uyruk;
+    boolean bildirimlerikapat;
+    boolean aramalardagorunmesin;
+    boolean hesaponaylandi;
+    /**
+     * 50 adet daha parametre olsun.
+     */
+
+
+
 }

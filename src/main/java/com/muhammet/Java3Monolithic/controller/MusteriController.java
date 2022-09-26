@@ -1,5 +1,6 @@
 package com.muhammet.Java3Monolithic.controller;
 
+import com.muhammet.Java3Monolithic.dto.response.MusteriFindByIdResponseDto;
 import com.muhammet.Java3Monolithic.repository.entity.Musteri;
 import com.muhammet.Java3Monolithic.repository.entity.view.VwMusteri;
 import com.muhammet.Java3Monolithic.service.MusteriService;
@@ -8,11 +9,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import static com.muhammet.Java3Monolithic.constants.EndPoints.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/musteri")
+@RequestMapping(VERSION+API+MUSTERI)
 @RequiredArgsConstructor
 public class MusteriController {
     private final MusteriService musteriService;
@@ -20,7 +21,7 @@ public class MusteriController {
     /**
      * localhost:9090/musteri/save
      */
-    @GetMapping("/save")
+    @GetMapping(SAVE)
     public String saveMusteri(String ad,String soyad, String adres){
         Musteri musteri = Musteri.builder()
                 .ad(ad)
@@ -31,7 +32,7 @@ public class MusteriController {
         return "Müşteri kaydedildi.";
     }
 
-    @GetMapping("/findall")
+    @GetMapping(FINDALL)
     public ResponseEntity<List<Musteri>> findAll(){
         return ResponseEntity.ok(musteriService.findAll());
     }
@@ -50,6 +51,14 @@ public class MusteriController {
     @GetMapping("/findbyadres")
     public ResponseEntity<List<Musteri>> findByAdres(String adres){
         return ResponseEntity.ok(musteriService.findByAdres(adres));
+    }
+
+    @GetMapping(FINDBYID)
+    public MusteriFindByIdResponseDto findByIdDto(Long id){
+        /**
+         * Müşteri ile ilgili 20 kalem bilginin dönmesi gerekli.
+         */
+        return musteriService.findByIdDto(id);
     }
 
 }
