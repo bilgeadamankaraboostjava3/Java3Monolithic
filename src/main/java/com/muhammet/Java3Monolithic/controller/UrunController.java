@@ -1,5 +1,6 @@
 package com.muhammet.Java3Monolithic.controller;
 
+import com.muhammet.Java3Monolithic.dto.response.UrunGetFindByIdResponseDto;
 import com.muhammet.Java3Monolithic.repository.entity.Urun;
 import com.muhammet.Java3Monolithic.service.UrunService;
 import lombok.RequiredArgsConstructor;
@@ -9,8 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+import static com.muhammet.Java3Monolithic.constants.EndPoints.*;
+
 @RestController
-@RequestMapping("/urun")
+@RequestMapping(VERSION+API+URUN)
 @RequiredArgsConstructor
 public class UrunController {
 
@@ -20,7 +23,7 @@ public class UrunController {
      * http://localhost:9090/urun/save?ad=Kalem&marka=TTMarka&model=TModel&fiyat=12&stok=240
      * @return
      */
-    @GetMapping("/save")
+    @GetMapping(SAVE)
     public String save(String ad, String marka, String model,
                        Double fiyat, Integer stok){
         Urun urun = Urun.builder()
@@ -33,8 +36,18 @@ public class UrunController {
         urunService.save(urun);
         return "Ürün Kayıtedildi.";
     }
-    @GetMapping("/findall")
-    public List<Urun> findAll(){
+
+    /**
+     * http://localhost:9090/mkv1/api/urun/getall
+     * @return
+     */
+    @GetMapping(GETALL)
+    public List<Urun> getAll(){
        return urunService.findAll();
+    }
+
+    @GetMapping(FINDBYID)
+    public UrunGetFindByIdResponseDto getFindId(Long id){
+        return urunService.findByIdDto(id);
     }
 }

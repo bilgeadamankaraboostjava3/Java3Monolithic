@@ -16,7 +16,7 @@ import javax.persistence.*;
 @SuperBuilder
 public class Satis extends Default {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     Long musterid;
     Long urunid;
