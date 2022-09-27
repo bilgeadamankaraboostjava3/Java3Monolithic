@@ -40,6 +40,11 @@ public class EndPoints {
      */
     public static final String FINDBYNAMEANDSURNAME = "/findbynameandsurname";
 
+    /**
+     * ÜRÜN İŞLEMLERİ END PONİT LERİ
+     */
+
+    public static final String URUN_SAVE_DTO = "/savedto";
 
 }
 

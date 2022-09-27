@@ -1,5 +1,6 @@
 package com.muhammet.Java3Monolithic.controller;
 
+import com.muhammet.Java3Monolithic.dto.request.UrunSaveRequestDto;
 import com.muhammet.Java3Monolithic.dto.response.UrunGetFindByIdResponseDto;
 import com.muhammet.Java3Monolithic.repository.entity.Urun;
 import com.muhammet.Java3Monolithic.service.UrunService;
@@ -21,6 +22,7 @@ public class UrunController {
 
     /**
      * http://localhost:9090/urun/save?ad=Kalem&marka=TTMarka&model=TModel&fiyat=12&stok=240
+     * http://localhost:9090/mkv1/api/urun/save?ad=%C5%9Feker&marka=tMarka&model=Bmodel&fiyat=2&stok=54
      * @return
      */
     @GetMapping(SAVE)
@@ -34,6 +36,12 @@ public class UrunController {
                 .stok(stok)
                 .build();
         urunService.save(urun);
+        return "Ürün Kayıtedildi.";
+    }
+
+    @GetMapping(URUN_SAVE_DTO)
+    public String save(UrunSaveRequestDto dto){
+        urunService.save(dto);
         return "Ürün Kayıtedildi.";
     }
 
