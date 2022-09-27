@@ -1,5 +1,7 @@
 package com.muhammet.Java3Monolithic.controller;
 
+import com.muhammet.Java3Monolithic.exception.ErrorType;
+import com.muhammet.Java3Monolithic.exception.MonolitichManagerException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,5 +31,10 @@ public class SatisController {
     @GetMapping(UPDATE)
     public String update(){
         return "Güncelleme Başarılı";
+    }
+
+    @GetMapping("/hataolustur")
+    public String hataOlustur(){
+        throw new MonolitichManagerException(ErrorType.SATIS_EKLEME_SORUNU);
     }
 }
