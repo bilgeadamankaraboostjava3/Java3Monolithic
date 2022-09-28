@@ -161,5 +161,16 @@ public interface IMusteriRepository extends JpaRepository<Musteri,Long> {
             "from Musteri m")
     List<VwMusteri> findAllView();
 
+    Musteri findByUsernameAndPsw(String username, String password);
+    Optional<Musteri> findOptionalByUsernameAndPsw(String username, String password);
+
+    /**
+     * Muhammet -> muhammet
+     * @param username
+     * @param password
+     * @return
+     */
+    @Query("select COUNT(m)>0 from Musteri m where UPPER(m.username)=UPPER(?1) and m.psw=?2")
+    Boolean isExistMusteri(String username,String password);
 
 }
