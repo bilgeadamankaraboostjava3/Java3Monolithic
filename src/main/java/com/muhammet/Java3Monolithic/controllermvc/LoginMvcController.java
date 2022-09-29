@@ -16,7 +16,7 @@ public class LoginMvcController {
 
     private final MusteriService musteriService;
 
-    // http://localhost:9090/login/loginpage
+    // http://localhost:9090/login/home
     @GetMapping("/loginpage")
     public ModelAndView loginGirisSayfasi(){
         /**
@@ -38,7 +38,7 @@ public class LoginMvcController {
     @PostMapping("/doLogin")
     public ModelAndView doLogin(String txtkullaniciadi,String txtsifre){
         if(musteriService.isExistUser(txtkullaniciadi,txtsifre)){
-            System.out.println("Giriş Başarılı");
+            return new ModelAndView("redirect:/home");
         }else{
             System.out.println("Kullanıcıadı veya şifre hatalı");
         }
